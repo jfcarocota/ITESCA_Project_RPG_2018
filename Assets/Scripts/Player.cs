@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameCore.SystemControls;
 
 public class Player : Character3D
 {
     protected override void Jump()
     {
-        anim.SetBool("ground", ground);
-        if (ground & SystemControls.Btn_jump)
+        anim.SetBool("ground", isGrounding);
+        if (Btn_jump & isGrounding)
         {
             base.Jump();
             anim.SetTrigger("jump");
@@ -18,7 +17,11 @@ public class Player : Character3D
     protected override void Move()
     {
         base.Move();
-        anim.SetFloat("move", Mathf.Abs(SystemControls.AxisDelta.y));
+        anim.SetFloat("move", Mathf.Abs(Axis.y));
     }
 
+    protected override void Turn()
+    {
+        base.Turn();
+    }
 }
